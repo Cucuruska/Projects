@@ -1,4 +1,4 @@
-""" 
+"""
 Testbench for pi_bbp.
 Control Pi value is in 'hex_pi.txt'.
 """
@@ -8,6 +8,7 @@ import re
 from pi_bbp import *
 from nose.tools import *
 from math import pi
+
 
 class PiTests():
     def __init__(self):
@@ -20,16 +21,16 @@ class PiTests():
         if not f:
             print "Can't open file" + control_file
 
-
         for line in f:
-            m = re.match( '([0-9a-fA-F ]+)\s*\:\s*([\d,]+)', line)
+            m = re.match('([0-9a-fA-F ]+)\s*\:\s*([\d,]+)', line)
             if m:
-                nums = re.sub( ' ', '', m.group(1)) # remove spaces
-                positions = re.sub( ',', '', m.group(2)) # remove commas
+                nums = re.sub(' ', '', m.group(1))    # remove spaces
+                positions = re.sub(',', '', m.group(2))    # remove commas
                 self.pi[positions] = nums
 
     def test_some_numbers(self):
-        """ Calculate all digits of Pi presented in the control file and compare values """
+        """ Calculate all digits of Pi presented in the control file
+            and compare values """
 
         for pos in sorted(self.pi):
             print 'check positions ' + str(int(pos) - 50) + ' - ' + pos
@@ -41,7 +42,3 @@ class PiTests():
 if __name__ == '__main__':
     test_instance = PiTests()
     test_instance.test_some_numbers()
-
-
-
-
